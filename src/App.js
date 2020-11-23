@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Context from '.\\components\\context\\context.js'
-import FirstName from '.\\components\\first-name.js'
-import LastName from '.\\components\\last-name.js'
+import Context from './components/context/context.js'
+import FirstName from './components/first-name.js'
+import LastName from './components/last-name.js'
 
 function App() {
   const [firstName, setFirstName] = useState('')

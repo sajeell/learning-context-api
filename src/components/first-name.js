@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Context from '.\\context\\context.js'
+import Context from './context/context.js'
 function FirstName() {
   const name = useContext(Context)
   return (

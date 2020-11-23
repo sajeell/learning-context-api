@@ -1,5 +1,9 @@
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css'
+
 import Context from './components/context/context.js'
 import FirstName from './components/first-name.js'
 import LastName from './components/last-name.js'
@@ -7,6 +11,7 @@ import LastName from './components/last-name.js'
 function App() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [number, setNumber] = useState('')
 
   const name = {
     firstName: firstName,
@@ -23,10 +28,24 @@ function App() {
     setLastName(e.target.value)
   }
 
+  const handleNumber = (e) => {
+    e.preventDefault()
+    setNumber(e.target.value)
+    if (number.length === 10) {
+      let temp1, temp2
+      temp1 = number.substr(0, 4)
+      temp2 = number.substr(4, 7)
+      setNumber(temp1 + '-' + temp2)
+    }
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault()
     setFirstName('')
     setLastName('')
+    setNumber('')
+    document.title = `${firstName} ${lastName}`
+    toast.success('🦄 Submitted')
   }
 
   return (
@@ -38,9 +57,12 @@ function App() {
         <input type="text" placeholder="Last Name" onChange={handleLastName} value={lastName} />
       </div>
       <div>
+        <input type="text" placeholder="Phone Number" onChange={handleNumber} value={number} />
+      </div>
+      <div>
         <button onClick={handleFormSubmit}>Submit</button>
       </div>
-
+      <ToastContainer />
       <Context.Provider value={name}>
         <FirstName />
         <LastName />

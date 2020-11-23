@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 
 import './App.css'
@@ -12,6 +12,10 @@ function App() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [number, setNumber] = useState('')
+
+  useEffect(() => {
+    toast.info('✨ Enter the data and press submit button to see the magic')
+  }, [])
 
   const name = {
     firstName: firstName,
@@ -40,12 +44,16 @@ function App() {
   }
 
   const handleFormSubmit = (e) => {
-    e.preventDefault()
-    setFirstName('')
-    setLastName('')
-    setNumber('')
-    document.title = `${firstName} ${lastName}`
-    toast.success('🦄 Submitted')
+    if (firstName.length === 0 || lastName.length === 0 || number.length === 0) {
+      toast.error('😔 Enter missing values')
+    } else {
+      e.preventDefault()
+      setFirstName('')
+      setLastName('')
+      setNumber('')
+      document.title = `${firstName} ${lastName}`
+      toast.success('🦄 Submitted')
+    }
   }
 
   return (
